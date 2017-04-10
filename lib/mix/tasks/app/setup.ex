@@ -9,12 +9,13 @@ defmodule Mix.Tasks.App.Setup do
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
+
     Almost done!
 
-    create your database: 
+    Create your database: 
     mix ecto.create
 
-    start your app:
+    Start your app:
     iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
 
     Visit http://localhost:4000
