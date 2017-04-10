@@ -1,7 +1,7 @@
 # Phoenix React Webpack Boilerplate!
 Because new.
 
-## Features:
+## Features
 - Phoenix 1.3
 - React
 - Webpack (with hot reloading)
