@@ -47,6 +47,3 @@ defmodule Mix.Tasks.App.Setup do
   end
 
 end
-
-
-    Mix.Tasks.Ecto.Create.run(["-r", ".Repo"])
