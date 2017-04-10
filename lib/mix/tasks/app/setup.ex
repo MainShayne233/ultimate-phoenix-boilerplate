@@ -7,7 +7,7 @@ defmodule Mix.Tasks.App.Setup do
     IO.puts "Fetching dependencies"
     Mix.Tasks.App.Rename.run([name, otp])
     IO.puts "Creating database"
-    Mix.Tasks.Ecto.Create.run(["-r" "#{name}.Repo"])
+    Mix.Tasks.Ecto.Create.run(["-r", "#{name}.Repo"])
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
