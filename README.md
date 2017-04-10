@@ -9,7 +9,7 @@ Because new.
 
 Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 (`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
-to [install Phoenix 1.3]
+to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
 
 ## Make your own
 ```bash
@@ -24,7 +24,7 @@ mix app.setup YourAppName your_app_name
 # start the server
 iex -S mix phx.server
 ```
-Then visit [localhost:4000]
+Then visit [localhost:4000](http://localhost:4000)
 
 ## Compiling assets
 This boilerplate serves up assets via the Webpack server middleware. However,
@@ -36,6 +36,3 @@ mix assets.digest
 
 MIX_ENV=prod mix assets.digest
 ```
-
-[install Phoenix 1.3]: (https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
-[localhost:4000]: (http://localhost:4000)
