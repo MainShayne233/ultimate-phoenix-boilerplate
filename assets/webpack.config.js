@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var publicPath = 'http://localhost:4002/'
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var env = process.env.MIX_ENV || 'dev'
 var prod = env === 'prod'
@@ -11,6 +12,7 @@ var hot = 'webpack-hot-middleware/client?path=' +
   publicPath + '__webpack_hmr&noInfo=true'
 
 var plugins = [
+  new CopyWebpackPlugin([{ from: './assets/static' }]),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
