@@ -21,6 +21,8 @@ cd your_app_name
 mix deps.get
 # run handy dandy mix task
 mix app.setup YourAppName your_app_name
+# create your database
+mix ecto.create
 # start the server
 iex -S mix phx.server
 ```
