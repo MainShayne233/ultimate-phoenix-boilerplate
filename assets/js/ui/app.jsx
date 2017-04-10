@@ -1,27 +1,14 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { 
-  Router, 
-  Route, 
-  browserHistory  
-} from 'react-router'
 
-
-class App extends Component {
+export default class App extends Component {
 
   render() {
     return (
       <div>
-        App
+        <h1>Phoenix React Webpack, hooray!</h1>
+        <p>Find me in ./assets/js/ui/app.jsx</p>
       </div>
     )
   }
-}
-
-export default function renderApp() {
-  const root = document.getElementById('root')
-  const app = React.createElement(App)
-
-  render(app, root)
 }
 
