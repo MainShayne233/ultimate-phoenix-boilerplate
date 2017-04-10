@@ -4,7 +4,7 @@
     "watch": "webpack --watch-stdin --progress --color"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
