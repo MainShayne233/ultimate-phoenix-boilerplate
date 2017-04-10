@@ -8,7 +8,6 @@
     <meta name="author" content="">
 
     <title>Hello PhoenixReactWebpackBoilerplate!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
@@ -24,7 +23,6 @@
       <!-- This will load assets from the webpack dev server when running in dev/test mode -->
       <script src='http://localhost:4002/app.bundle.js'></script>
     <% else %>
-      <!-- This will load assets from the priv/ directory when running in prod -->
       <script src="<%= static_path(@conn, "/js/app.bundle.js") %>"></script>
     <% end %>
 
