@@ -11,7 +11,7 @@ Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 (`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
 to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
 
-## Make your own
+## Make it your own
 ```bash
 # clone repo with your app name
 git clone https://github.com/MainShayne233/phoenix_react_webpack_boilerplate.git your_app_name
