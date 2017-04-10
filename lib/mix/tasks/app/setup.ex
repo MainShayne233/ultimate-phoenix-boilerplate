@@ -2,11 +2,22 @@ defmodule Mix.Tasks.App.Setup do
   use Mix.Task
 
   def run([name, otp]) do
+    IO.puts "Initializing git"
     git_init()
+    IO.puts "Fetching dependencies"
     Mix.Tasks.Deps.Get.run([])
+    IO.puts "Renaming app to #{name}"
     Mix.Tasks.App.Rename.run([name, otp])
+    IO.puts "Creating database"
     Mix.Tasks.Ecto.Create.run([])
+    IO.puts "Install npm packages"
     node_init()
+    IO.puts """
+    All done!
+    Run iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
+    Visit http://localhost:4000
+    Enjoy!
+    """
   end
 
   def run (_) do
