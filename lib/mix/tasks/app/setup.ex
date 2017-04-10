@@ -6,8 +6,10 @@ defmodule Mix.Tasks.App.Setup do
     git_init()
     IO.puts "Fetching dependencies"
     Mix.Tasks.App.Rename.run([name, otp])
+    IO.puts "recompiling"
+    IEx.Helpers.recompile()
     IO.puts "Creating database"
-    Mix.Tasks.Ecto.Create.run(["-r", "#{name}.Repo"])
+    Mix.Tasks.Ecto.Create.run([])
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
@@ -42,3 +44,6 @@ defmodule Mix.Tasks.App.Setup do
   end
 
 end
+
+
+    Mix.Tasks.Ecto.Create.run(["-r", ".Repo"])
