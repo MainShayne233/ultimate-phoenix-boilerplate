@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Rename do
+defmodule Mix.Tasks.App.Rename do
   use Mix.Task
 
   def current_name, do: "PhoenixReactWebpackBoilerplate"
@@ -7,6 +7,7 @@ defmodule Mix.Tasks.Rename do
   def run(args) do
     with {:ok, {name, otp}} <- get_name(args) do
       rename_in_directory(name, otp)
+      IO.puts "Renamed app to #{name}!"
     end
   end
 

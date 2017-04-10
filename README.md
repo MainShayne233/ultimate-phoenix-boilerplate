@@ -25,7 +25,7 @@ git commit -m "init"
 # fetch dependencies
 mix deps.get
 # rename app
-mix rename NewAppName new_app_name
+mix app.rename YourAppName your_app_name
 # create database
 mix ecto.create
 # enter assets directory
