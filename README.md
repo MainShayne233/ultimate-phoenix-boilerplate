@@ -1,3 +1,1 @@
-# Codetogether
-
-Collaborative coding environment
+# 

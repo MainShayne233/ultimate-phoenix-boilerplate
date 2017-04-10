@@ -13,7 +13,7 @@ defmodule Mix.Tasks.Rename do
   def rename_in_directory(name, otp, cwd \\ ".") do
     cwd
     |> File.ls!
-    |> Enum.each(fn path -> 
+    |> Enum.each(fn path ->
       file_or_dir = cwd <> "/" <> path
       cond do
         is_valid_directory?(file_or_dir) ->
@@ -35,9 +35,9 @@ defmodule Mix.Tasks.Rename do
   def get_name(args) do
     args
     |> case do
-      [name, otp] -> 
+      [name, otp] ->
         {:ok, {name, otp}}
-      _           -> 
+      _           ->
         IO.puts """
         Invalid arguments. Command should look like: mix rename AppName app_name
         """
@@ -45,7 +45,7 @@ defmodule Mix.Tasks.Rename do
   end
 
   def is_valid_directory?(dir) do
-    File.dir?(dir) and 
+    File.dir?(dir) and
     dir in bad_directories() == false
   end
 
@@ -58,7 +58,7 @@ defmodule Mix.Tasks.Rename do
   def has_valid_extension?(file) do
     extension = file
     |> String.split(".")
-    |> List.last 
+    |> List.last
     extension in valid_extensions()
   end
 
@@ -67,6 +67,7 @@ defmodule Mix.Tasks.Rename do
       "ex",
       "exs",
       "eex",
+      "md",
     ]
   end
 
