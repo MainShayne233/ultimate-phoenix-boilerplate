@@ -6,16 +6,19 @@ defmodule Mix.Tasks.App.Setup do
     git_init()
     IO.puts "Fetching dependencies"
     Mix.Tasks.App.Rename.run([name, otp])
-    IO.puts "recompiling"
-    IEx.Helpers.recompile()
-    IO.puts "Creating database"
-    Mix.Tasks.Ecto.Create.run([])
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
-    All done!
-    Run iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
+    Almost done!
+
+    create your database: 
+    mix ecto.create
+
+    start your app:
+    iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
+
     Visit http://localhost:4000
+
     Enjoy!
     """
   end
