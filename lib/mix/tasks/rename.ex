@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Rename do
   use Mix.Task
 
-  def current_name, do: "Codetogether"
-  def current_otp, do: "codetogether"
+  def current_name, do: "PhoenixReactWebpackBoilerplate"
+  def current_otp, do: "phoenix_react_webpack_boilerplate"
 
   def run(args) do
     with {:ok, {name, otp}} <- get_name(args) do
