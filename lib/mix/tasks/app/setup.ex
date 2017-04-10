@@ -5,10 +5,9 @@ defmodule Mix.Tasks.App.Setup do
     IO.puts "Initializing git"
     git_init()
     IO.puts "Fetching dependencies"
-    Mix.Tasks.Deps.Get.run([])
     Mix.Tasks.App.Rename.run([name, otp])
     IO.puts "Creating database"
-    Mix.Tasks.Ecto.Create.run([])
+    Mix.Tasks.Ecto.Create.run(["-r" "#{name}.Repo"])
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
