@@ -5,7 +5,7 @@ Because new.
 - Phoenix 1.3
 - React
 - Webpack (with hot reloading)
-- Less
+- SASS
 
 Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 (`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
