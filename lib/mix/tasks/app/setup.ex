@@ -2,12 +2,11 @@ defmodule Mix.Tasks.App.Setup do
   use Mix.Task
 
   def run([name, otp]) do
+    Mix.Tasks.App.Rename.run([name, otp])
+    IO.puts "Creating config/prod.secret.exs"
+    create_prod_secret_config(name, otp)
     IO.puts "Initializing git"
     git_init()
-    IO.puts "Fetching dependencies"
-    Mix.Tasks.App.Rename.run([name, otp])
-    IO.puts "Create config/prod.secret.exs"
-    create_prod_secret_config(name, otp)
     IO.puts "Installing npm packages"
     node_init()
     IO.puts """
@@ -63,9 +62,10 @@ defmodule Mix.Tasks.App.Setup do
       database: "#{otp}_prod",
       pool_size: 15
     """
+    File.write("./config/prod.secret.exs", file)
   end
 
-  def new_secret do
+  defp new_secret do
     64
     |> :crypto.strong_rand_bytes
     |> Base.encode64 
