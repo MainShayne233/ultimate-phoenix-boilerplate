@@ -1,42 +1,54 @@
-var path = require('path')
-var webpack = require('webpack')
-var publicPath = 'http://localhost:4002/'
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const publicPath = 'http://localhost:4002/'
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-var env = process.env.MIX_ENV || 'dev'
-var prod = env === 'prod'
+const env = process.env.MIX_ENV || 'dev'
+const prod = env === 'prod'
 
-var entry = './assets/js/main.js'
+const appEntry = path.join(__dirname, 'js', 'main.js')
 
-var hot = 'webpack-hot-middleware/client?path=' +
-  publicPath + '__webpack_hmr&noInfo=true'
+const DEV_ENTRIES = [
+  'react-hot-loader/patch',
+  'webpack-dev-server/client?http://localhost:4002',
+  'webpack/hot/only-dev-server',
+]
 
 var plugins = [
-  new CopyWebpackPlugin([{ from: './assets/static' }]),
+  new CopyWebpackPlugin([{ from: path.join(__dirname,'static') }]),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
     __PROD: prod,
-    __DEV: env === 'dev'
-  })
+    __DEV: env === 'dev',
+  }),
 ]
 
 if (!prod) plugins.push(new webpack.HotModuleReplacementPlugin())
 
 module.exports = {
   devtool: prod ? false : 'cheap-module-eval-source-map',
-  entry: prod ? entry : [hot, entry],
+  entry: {
+    app: prod ? appEntry : DEV_ENTRIES.concat([appEntry]),
+  },
   output: {
-    path: path.resolve('priv/static/js'),
-    filename: 'app.bundle.js',
+    path:  path.join(__dirname, '..', 'priv', 'static', 'js'),
+    filename: '[name].bundle.js',
     publicPath: publicPath,
   },
   resolve: {
-    modules: [ "assets/node_modules", __dirname + "/assets/js" ],
+    modules: [
+      __dirname,
+      'node_modules',
+      'js',
+    ],
     extensions: ['*', '.js', '.jsx'],
+    alias: {
+      phoenix: path.join(__dirname, '..', 'deps', 'phoenix', 'priv', 'static', 'phoenix.js'),
+    },
   },
   resolveLoader: {
-    modules: [path.join(__dirname, "node_modules")]
+    modules: [path.join(__dirname, 'node_modules')],
   },
   plugins: plugins,
   module: {
@@ -44,19 +56,29 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          "style-loader",
-          "css-loader",
-          "less-loader",
-        ]
+          'style-loader',
+          'css-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.jsx?$/,
-        exclude: path.resolve(__dirname, 'assets/node_modules'),
-        include: __dirname,
-        use: [
-          'babel-loader'
-        ]
+        use: ['babel-loader'],
+        include: path.join(__dirname, 'js'),
+        exclude: /node_modules/,
       },
-    ]
-  }
+    ],
+  },
+  devServer: {
+    hot: true,
+    overlay: true,
+    quiet: true,
+    port: 4002,
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    },
+  },
 }

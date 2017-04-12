@@ -5,8 +5,12 @@ config :phoenix_react_webpack_boilerplate, PhoenixReactWebpackBoilerplate.Web.En
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [{Path.expand("assets/webpack.dev.js"), []}]
-
+   watchers: [
+     node: [
+       "./node_modules/.bin/webpack-dev-server", "--watch-stdin", "--colors",
+       cd: Path.expand("../assets", __DIR__),
+     ]
+    ]
 
 config :phoenix_react_webpack_boilerplate, PhoenixReactWebpackBoilerplate.Web.Endpoint,
   live_reload: [

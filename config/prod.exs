@@ -7,5 +7,4 @@ config :phoenix_react_webpack_boilerplate, PhoenixReactWebpackBoilerplate.Web.En
 
 config :logger, level: :info
 
-
 import_config "prod.secret.exs"
