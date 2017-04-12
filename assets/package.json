@@ -19,10 +19,11 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "phoenix": "file:../deps/phoenix",
+    "react-hot-loader": "^3.0.0-beta.2",
+    "redbox-react": "^1.3.6",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3",
-    "webpack-dev-middleware": "^1.10.1",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "react": "^15.5.3",
