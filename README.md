@@ -38,3 +38,21 @@ mix assets.digest
 
 MIX_ENV=prod mix assets.digest
 ```
+
+## Silence the webpack log
+The webpack log can be useful when debugging things like a stylesheet synatx error, but it can
+be annoying when all you care about is the Elixir console. To silence the webpack server, add ```quiet: true``` to the ```devServer``` config in ```./assets/webpack.config.js```
+```javascript
+  devServer: {
+    hot: true,
+    overlay: true,
+    quiet: true,
+    port: 4002,
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    },
+  },
+```

@@ -54,11 +54,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: [
           'style-loader',
           'css-loader',
-          'less-loader',
+          'sass-loader',
         ],
       },
       {
@@ -72,7 +72,6 @@ module.exports = {
   devServer: {
     hot: true,
     overlay: true,
-    quiet: true,
     port: 4002,
     historyApiFallback: true,
     headers: {

@@ -15,11 +15,10 @@
     "copy-webpack-plugin": "^4.0.1",
     "cors": "^2.8.3",
     "css-loader": "^0.28.0",
-    "express": "^4.15.2",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.3",
+    "node-sass": "^4.5.2",
     "phoenix": "file:../deps/phoenix",
     "react-hot-loader": "^3.0.0-beta.2",
+    "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"
