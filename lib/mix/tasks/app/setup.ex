@@ -3,12 +3,20 @@ defmodule Mix.Tasks.App.Setup do
 
   def run([name, otp]) do
     Mix.Tasks.App.Rename.run([name, otp])
+    Rename.run(
+      {"PhoenixReactWebpackBoilerplate", name},
+      {"phoenix_react_webpack_boilerplate", otp}
+    )
+    IO.puts "Removing rename dependency"
+    remove_rename_dependency()
     IO.puts "Creating config/prod.secret.exs"
     create_prod_secret_config(name, otp)
     IO.puts "Initializing git"
     git_init()
     IO.puts "Installing npm packages"
     node_init()
+    IO.puts "Removing this mix task (you shouldn't need it anymore)"
+    remove_mix_task()
     IO.puts """
 
     Almost done!
@@ -30,6 +38,19 @@ defmodule Mix.Tasks.App.Setup do
     Must be run with name arguments:
     mix app.setup MyApp my_app
     """
+  end
+
+  defp remove_rename_dependency do
+    with_dep_removed = "mix.exs"
+    |> File.read!
+    |> String.split("\n")
+    |> Enum.reject(&(&1 |> String.contains?(":rename")))
+    |> Enum.join("\n")
+    File.write("mix.exs", with_dep_removed)
+  end
+
+  defp remove_mix_task do
+    System.cmd("rm", ["-rf", "lib/mix/tasks/app"])
   end
 
   defp git_init do
