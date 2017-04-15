@@ -63,7 +63,7 @@ defmodule Mix.Tasks.App.Setup do
 
   defp git_init do
     if System.get_env("GIT_RESET") == "false" do
-      Mix.Shell.IO.info "GIT_RESET set to false. Skipping."
+      Mix.Shell.IO.info "GIT_RESET set to false. Skipping git init."
     else
       Mix.Shell.IO.info "Initializing git"
       [
