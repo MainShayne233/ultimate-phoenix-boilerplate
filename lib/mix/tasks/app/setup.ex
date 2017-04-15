@@ -2,7 +2,6 @@ defmodule Mix.Tasks.App.Setup do
   use Mix.Task
 
   def run([name, otp]) do
-    Mix.Tasks.App.Rename.run([name, otp])
     Rename.run(
       {"PhoenixReactWebpackBoilerplate", name},
       {"phoenix_react_webpack_boilerplate", otp}
