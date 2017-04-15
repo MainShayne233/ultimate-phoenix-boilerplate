@@ -2,44 +2,32 @@ defmodule Mix.Tasks.App.Setup do
   use Mix.Task
 
   def run([name, otp]) do
-    Rename.run(
-      {"PhoenixReactWebpackBoilerplate", name},
-      {"phoenix_react_webpack_boilerplate", otp}
-    )
-    IO.puts "Removing rename dependency"
+    rename_app(name, otp)
     remove_rename_dependency()
-    IO.puts "Creating config/prod.secret.exs"
     create_prod_secret_config(name, otp)
-    IO.puts "Initializing git"
     git_init()
-    IO.puts "Installing npm packages"
     node_init()
-    IO.puts "Removing this mix task (you shouldn't need it anymore)"
     remove_mix_task()
-    IO.puts """
-
-    Almost done!
-
-    Create your database: 
-    mix ecto.create
-
-    Start your app:
-    iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
-
-    Visit http://localhost:4000
-
-    Enjoy!
-    """
+    print_conclusion_message()
   end
 
   def run (_) do
-    IO.puts """
+    Mix.Shell.IO.error """
     Must be run with name arguments:
     mix app.setup MyApp my_app
     """
   end
 
+  def rename_app(name, otp) do
+    Mix.Shell.IO.info "Renaming app"
+    Rename.run(
+      {"PhoenixReactWebpackBoilerplate", name},
+      {"phoenix_react_webpack_boilerplate", otp}
+    )
+  end
+
   defp remove_rename_dependency do
+    Mix.Shell.IO.info "Removing rename dependency"
     with_dep_removed = "mix.exs"
     |> File.read!
     |> String.split("\n")
@@ -48,27 +36,8 @@ defmodule Mix.Tasks.App.Setup do
     File.write("mix.exs", with_dep_removed)
   end
 
-  defp remove_mix_task do
-    System.cmd("rm", ["-rf", "lib/mix/tasks/app"])
-  end
-
-  defp git_init do
-    [
-      "rm -rf .git",
-      "git init",
-      "git add -A",
-      "git commit -m 'init'",
-    ]
-    |> Enum.each(&Mix.Shell.IO.cmd/1)
-  end
-
-  defp node_init do
-    File.cd!("assets")
-    Mix.Shell.IO.cmd("npm i")
-    File.cd!("..")
-  end
-
   defp create_prod_secret_config(name, otp) do
+    Mix.Shell.IO.info "Creating config/prod.secret.exs"
     file = """
     use Mix.Config
 
@@ -92,4 +61,43 @@ defmodule Mix.Tasks.App.Setup do
     |> binary_part(0, 64)
   end
 
+  defp git_init do
+    Mix.Shell.IO.info "Initializing git"
+    [
+      "rm -rf .git",
+      "git init",
+      "git add -A",
+      "git commit -m 'init'",
+    ]
+    |> Enum.each(&Mix.Shell.IO.cmd/1)
+  end
+
+  defp node_init do
+    Mix.Shell.IO.info "Installing npm packages"
+    File.cd!("assets")
+    Mix.Shell.IO.cmd("npm i")
+    File.cd!("..")
+  end
+
+  defp remove_mix_task do
+    Mix.Shell.IO.info "Removing this mix task (you shouldn't need it anymore)"
+    Mix.Shell.IO.cmd("rm -rf lib/mix/tasks/app")
+  end
+
+  defp print_conclusion_message do
+    Mix.Shell.IO.info """
+
+    Almost done!
+
+    Create your database: 
+    mix ecto.create
+
+    Start your app:
+    iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
+
+    Visit http://localhost:4000
+
+    Enjoy!
+    """
+  end
 end
