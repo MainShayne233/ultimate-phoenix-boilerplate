@@ -62,14 +62,18 @@ defmodule Mix.Tasks.App.Setup do
   end
 
   defp git_init do
-    Mix.Shell.IO.info "Initializing git"
-    [
-      "rm -rf .git",
-      "git init",
-      "git add -A",
-      "git commit -m 'init'",
-    ]
-    |> Enum.each(&Mix.Shell.IO.cmd/1)
+    if System.get_env("GIT_RESET") == false do
+      Mix.Shell.IO.info "GIT_RESET set to false. Skipping."
+    else
+      Mix.Shell.IO.info "Initializing git"
+      [
+        "rm -rf .git",
+        "git init",
+        "git add -A",
+        "git commit -m 'init'",
+      ]
+      |> Enum.each(&Mix.Shell.IO.cmd/1)
+    end
   end
 
   defp node_init do
