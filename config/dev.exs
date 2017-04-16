@@ -32,3 +32,7 @@ config :phoenix_react_webpack_boilerplate, PhoenixReactWebpackBoilerplate.Repo,
   database: "phoenix_react_webpack_boilerplate_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+  
+import_config "setup.exs"

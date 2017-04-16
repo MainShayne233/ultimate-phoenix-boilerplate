@@ -7,7 +7,8 @@ defmodule Mix.Tasks.App.Setup do
          :ok <- create_prod_secret_config(name, otp),
          :ok <- git_init(),
          :ok <- node_init(),
-         :ok <- remove_mix_task() do
+         :ok <- remove_mix_task(),
+         :ok <- remove_setup_config() do
       :ok
     end
     |> case do
@@ -16,11 +17,28 @@ defmodule Mix.Tasks.App.Setup do
     end
   end
 
-  def run (_) do
-    Mix.Shell.IO.error """
-    Must be run with name arguments:
-    mix app.setup MyApp my_app
+  def run([]) do
+    run([
+      config()[:name],
+      config()[:otp],
+    ])
+  end
+
+  def run(_) do
     """
+    Call should look like:
+    mix app.setup AppName app_name
+    or, with name/otp set in config/setup.exs
+    mix app.setup
+    """
+    |> print_error_message
+  end
+
+  def config do
+    Application.get_env(
+      :phoenix_react_webpack_boilerplate,
+      Mix.Tasks.App.Setup
+    )
   end
 
   def rename_app(name, otp) do
@@ -104,6 +122,20 @@ defmodule Mix.Tasks.App.Setup do
     :ok
   rescue
     _ -> {:error, "Failed to remove mix task"}
+  end
+
+  def remove_setup_config do
+    Mix.Shell.IO.info "Removing setup config file"
+    Mix.Shell.IO.cmd("rm -rf config/setup.exs")
+    with_import_removed = "config/dev.exs"
+    |> File.read!
+    |> String.split("\n") 
+    |> Enum.reject(&(&1 |> String.contains?("setup.exs")))
+    |> Enum.join
+    File.write!("config/dev.exs", with_import_removed)
+  rescue
+    _ -> {:error, "Failed to remove setup config"}
+
   end
 
   defp print_conclusion_message do
