@@ -131,7 +131,7 @@ defmodule Mix.Tasks.App.Setup do
     |> File.read!
     |> String.split("\n") 
     |> Enum.reject(&(&1 |> String.contains?("setup.exs")))
-    |> Enum.join
+    |> Enum.join("\n")
     File.write!("config/dev.exs", with_import_removed)
   rescue
     _ -> {:error, "Failed to remove setup config"}
