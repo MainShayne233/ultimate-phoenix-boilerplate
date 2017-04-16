@@ -5,7 +5,7 @@ defmodule Mix.Tasks.App.Setup.Frontend do
     Mix.Shell.IO.info "Setting up frontend"
     with {:ok, module} <- get_frontend_module() do
       with :ok <- module.run() do
-        remove_other_asset_directories
+        remove_other_asset_directories()
       end
     end
   end
