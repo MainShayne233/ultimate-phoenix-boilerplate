@@ -134,7 +134,7 @@ defmodule Mix.Tasks.App.Setup do
     |> Enum.join
     File.write!("config/dev.exs", with_import_removed)
   rescue
-    _ -> {:error, "Failed to remove mix task"}
+    _ -> {:error, "Failed to remove setup config"}
 
   end
 
