@@ -19,6 +19,7 @@ defmodule Mix.Tasks.App.Setup.Frontend.Elm do
     Mix.Shell.IO.info("Installing Elm stuff")
     File.cd!("./assets")
     Mix.Shell.IO.cmd("elm package install -y")
+    File.cd!("..")
     :ok
   rescue
     _ -> {:error, "Failed to install Elm stuff"}
