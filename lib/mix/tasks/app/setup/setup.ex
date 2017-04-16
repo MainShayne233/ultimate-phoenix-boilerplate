@@ -40,13 +40,6 @@ defmodule Mix.Tasks.App.Setup do
     )
   end
 
-  def run (_) do
-    Mix.Shell.IO.error """
-    Must be run with name arguments:
-    mix app.setup MyApp my_app
-    """
-  end
-
   def rename_app(name, otp) do
     Mix.Shell.IO.info "Renaming app"
     Rename.run(
