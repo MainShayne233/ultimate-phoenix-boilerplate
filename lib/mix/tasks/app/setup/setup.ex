@@ -2,13 +2,18 @@ defmodule Mix.Tasks.App.Setup do
   use Mix.Task
 
   def run([name, otp]) do
-    rename_app(name, otp)
-    remove_rename_dependency()
-    create_prod_secret_config(name, otp)
-    git_init()
-    node_init()
-    remove_mix_task()
-    print_conclusion_message()
+    with :ok <- rename_app(name, otp),
+         :ok <- remove_rename_dependency(),
+         :ok <- create_prod_secret_config(name, otp),
+         :ok <- git_init(),
+         :ok <- node_init(),
+         :ok <- remove_mix_task() do
+      :ok
+    end
+    |> case do
+      :ok             -> print_conclusion_message()
+      {:error, error} -> print_error_message(error)
+    end
   end
 
   def run (_) do
@@ -24,6 +29,9 @@ defmodule Mix.Tasks.App.Setup do
       {"PhoenixReactWebpackBoilerplate", name},
       {"phoenix_react_webpack_boilerplate", otp}
     )
+    :ok
+  rescue
+    _ -> {:error, "Failed to rename the app to #{name}/#{otp}"}
   end
 
   defp remove_rename_dependency do
@@ -33,7 +41,9 @@ defmodule Mix.Tasks.App.Setup do
     |> String.split("\n")
     |> Enum.reject(&(&1 |> String.contains?(":rename")))
     |> Enum.join("\n")
-    File.write("mix.exs", with_dep_removed)
+    File.write!("mix.exs", with_dep_removed)
+  rescue
+    _ -> {:error, "Failed to remove the :rename dependency from mix.exs"}
   end
 
   defp create_prod_secret_config(name, otp) do
@@ -51,7 +61,7 @@ defmodule Mix.Tasks.App.Setup do
       database: "#{otp}_prod",
       pool_size: 15
     """
-    File.write("./config/prod.secret.exs", file)
+    File.write!("./config/prod.secret.exs", file)
   end
 
   defp new_secret do
@@ -74,6 +84,9 @@ defmodule Mix.Tasks.App.Setup do
       ]
       |> Enum.each(&Mix.Shell.IO.cmd/1)
     end
+    :ok
+  rescue
+    _ -> {:error, "Failed to initialize git"}
   end
 
   defp node_init do
@@ -81,11 +94,15 @@ defmodule Mix.Tasks.App.Setup do
     File.cd!("assets")
     Mix.Shell.IO.cmd("npm i")
     File.cd!("..")
+  rescue
+    _ -> {:error, "Failed to install npm packages"}
   end
 
   defp remove_mix_task do
     Mix.Shell.IO.info "Removing this mix task (you shouldn't need it anymore)"
     Mix.Shell.IO.cmd("rm -rf lib/mix/tasks/app")
+  rescue
+    _ -> {:error, "Failed to remove mix task"}
   end
 
   defp print_conclusion_message do
