@@ -121,4 +121,8 @@ defmodule Mix.Tasks.App.Setup do
     Enjoy!
     """
   end
+
+  defp print_error_message(error) do
+    Mix.Shell.IO.error(error)
+  end
 end
