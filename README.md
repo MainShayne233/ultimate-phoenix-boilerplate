@@ -72,9 +72,15 @@ be annoying when all you care about is the Elixir console. To silence the webpac
 
 ## Roadmap
 
+### Frontends
 - Elm
 - Ember
 - Angular
+### Configuration
+- React
+  - react-router
+  - redux
+### Stylesheets
 - LESS
 - PostCSS 
 ```
