@@ -16,6 +16,30 @@ defmodule Mix.Tasks.App.Setup do
     end
   end
 
+  def run([]) do
+    run([
+      config()[:name],
+      config()[:otp],
+    ])
+  end
+
+  def run(_) do
+    """
+    Call should look like:
+    mix app.setup AppName app_name
+    or, with name/otp set in config/setup.exs
+    mix app.setup
+    """
+    |> print_error_message
+  end
+
+  def config do
+    Application.get_env(
+      :phoenix_react_webpack_boilerplate,
+      Mix.Tasks.App.Setup
+    )
+  end
+
   def run (_) do
     Mix.Shell.IO.error """
     Must be run with name arguments:
