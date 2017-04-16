@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const publicPath = 'http://localhost:4002/'
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 const env = process.env.MIX_ENV || 'dev'
 const prod = env === 'prod'
@@ -15,13 +16,17 @@ const DEV_ENTRIES = [
 ]
 
 var plugins = [
-  new CopyWebpackPlugin([{ from: path.join(__dirname,'static') }]),
+  new CopyWebpackPlugin([{
+    from: path.join(__dirname, 'static'),
+    to: path.join(__dirname, '..', 'priv', 'static'),
+  }]),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
     __PROD: prod,
     __DEV: env === 'dev',
   }),
+  new WriteFilePlugin(),
 ]
 
 if (!prod) plugins.push(new webpack.HotModuleReplacementPlugin())
