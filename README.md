@@ -20,6 +20,8 @@ If you want the default configuration:
 - Webpack (with hot reloading)
 - SASS (.scss)
 
+then skip to running the setup commands.
+
 If you want something different, set `config/setup.exs` to you liking.
 
 Then run:
