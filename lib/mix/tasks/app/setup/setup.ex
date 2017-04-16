@@ -128,7 +128,7 @@ defmodule Mix.Tasks.App.Setup do
     Mix.Shell.IO.info "Removing setup config file"
     Mix.Shell.IO.cmd("rm -rf config/setup.exs")
     with_import_removed = "config/dev.exs"
-    |> File.write!
+    |> File.read!
     |> String.split("\n") 
     |> Enum.reject(&(&1 |> String.contains?("setup.exs")))
     |> Enum.join
