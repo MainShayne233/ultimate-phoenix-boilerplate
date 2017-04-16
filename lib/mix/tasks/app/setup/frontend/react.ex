@@ -6,6 +6,7 @@ defmodule Mix.Tasks.App.Setup.Frontend.React do
   end
 
   def setup_assets do
+    Mix.Shell.IO.info("Using react_assets")
     Mix.Shell.IO.cmd("mv react_assets assets")
     :ok
   rescue

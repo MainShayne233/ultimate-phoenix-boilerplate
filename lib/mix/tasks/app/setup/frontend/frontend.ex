@@ -2,6 +2,7 @@ defmodule Mix.Tasks.App.Setup.Frontend do
   use Mix.Task
 
   def run(_args \\ []) do
+    Mix.Shell.IO.info "Setting up frontend"
     with {:ok, module} <- get_frontend_module() do
       module.run()
     end
