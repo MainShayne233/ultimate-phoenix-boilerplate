@@ -4,7 +4,9 @@ defmodule Mix.Tasks.App.Setup.Frontend do
   def run(_args \\ []) do
     Mix.Shell.IO.info "Setting up frontend"
     with {:ok, module} <- get_frontend_module() do
-      module.run()
+      with :ok <- module.run() do
+        remove_other_asset_directories()
+      end
     end
   end
 
@@ -27,6 +29,7 @@ defmodule Mix.Tasks.App.Setup.Frontend do
   defp frontend_options do
     %{
       "react" => __MODULE__.React,
+      "elm" => __MODULE__.Elm,
     }
   end
 
@@ -39,6 +42,16 @@ defmodule Mix.Tasks.App.Setup.Frontend do
     Valid frontend options are:
     #{options}
     """
+  end
+
+  defp remove_other_asset_directories() do
+    Mix.Shell.IO.info "Removing unused asset directories"
+    File.ls!
+    |> Enum.filter(&(&1 |> String.contains?("assets")))
+    |> Enum.reject(&(&1 == "assets"))
+    |> Enum.each(fn asset_dir -> 
+      Mix.Shell.IO.cmd("rm -rf #{asset_dir}")
+    end)
   end
 
   defdelegate config, to: Mix.Tasks.App.Setup

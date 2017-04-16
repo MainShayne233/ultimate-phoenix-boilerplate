@@ -5,5 +5,10 @@
 erl_crash.dump
 /config/*.secret.exs
 assets/node_modules/
+react_assets/node_modules/
 priv/static/
 *.swp
+
+assets/elm-stuff
+elm_assets/elm-stuff
+elm_assets/node_modules
