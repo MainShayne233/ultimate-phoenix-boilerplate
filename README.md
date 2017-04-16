@@ -21,7 +21,7 @@ to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master
 
 ### Choose your configuration
 
-If you want the default configuration (as of this commit, this is the only configuration):
+If you want the default configuration:
 - React
 - Webpack (with hot reloading)
 - SASS (.scss)
