@@ -5,10 +5,11 @@ defmodule Mix.Tasks.App.Setup do
     with :ok <- rename_app(name, otp),
          :ok <- remove_rename_dependency(),
          :ok <- create_prod_secret_config(name, otp),
-         :ok <- git_init(),
+         :ok <- __MODULE__.Frontend.run(),
          :ok <- node_init(),
          :ok <- remove_mix_task(),
-         :ok <- remove_setup_config() do
+         :ok <- remove_setup_config(),
+         :ok <- git_init() do
       :ok
     end
     |> case do
