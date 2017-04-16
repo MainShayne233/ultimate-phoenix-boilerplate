@@ -27,6 +27,7 @@ defmodule Mix.Tasks.App.Setup.Frontend do
   defp frontend_options do
     %{
       "react" => __MODULE__.React,
+      "elm" => __MODULE__.Elm,
     }
   end
 
