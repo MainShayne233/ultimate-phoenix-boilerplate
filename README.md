@@ -12,6 +12,15 @@ Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
 
 ## Make it your own
+
+If you want the default configuration:
+- React
+- Webpack (with hot reloading)
+- SASS (.scss)
+
+If you want something different, set `config/setup.exs` to you liking.
+
+Then run:
 ```bash
 # clone repo with your app name
 git clone https://github.com/MainShayne233/phoenix_react_webpack_boilerplate.git your_app_name
@@ -20,12 +29,13 @@ cd your_app_name
 # fetch dependencies
 mix deps.get
 # run handy dandy mix task
-mix app.setup YourAppName your_app_name
+mix app.setup YourAppName your_app_name # optional name arguments override those in config/setup.exs
 # create your database
 mix ecto.create
 # start the server
 iex -S mix phx.server
 ```
+
 Then visit [localhost:4000](http://localhost:4000)
 
 ## Compiling assets
