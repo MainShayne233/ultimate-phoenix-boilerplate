@@ -1,12 +1,6 @@
 # Phoenix React Webpack Boilerplate!
 Because new.
 
-## Features
-- Phoenix 1.3
-- React
-- Webpack (with hot reloading)
-- SASS
-
 Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 (`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
 to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
