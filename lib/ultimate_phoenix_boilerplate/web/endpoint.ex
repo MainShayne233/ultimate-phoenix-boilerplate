@@ -1,14 +1,14 @@
-defmodule PhoenixReactWebpackBoilerplate.Web.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenix_react_webpack_boilerplate
+defmodule UltimatePhoenixBoilerplate.Web.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ultimate_phoenix_boilerplate
 
-  socket "/socket", PhoenixReactWebpackBoilerplate.Web.UserSocket
+  socket "/socket", UltimatePhoenixBoilerplate.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :phoenix_react_webpack_boilerplate, gzip: false,
+    at: "/", from: :ultimate_phoenix_boilerplate, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,10 +35,10 @@ defmodule PhoenixReactWebpackBoilerplate.Web.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_phoenix_react_webpack_boilerplate_key",
+    key: "_ultimate_phoenix_boilerplate_key",
     signing_salt: "X4uG0wwI"
 
-  plug PhoenixReactWebpackBoilerplate.Web.Router
+  plug UltimatePhoenixBoilerplate.Web.Router
 
   @doc """
   Dynamically loads configuration from the system environment

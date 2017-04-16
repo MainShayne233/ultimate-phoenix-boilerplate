@@ -1,12 +1,12 @@
-defmodule PhoenixReactWebpackBoilerplate.Web do
+defmodule UltimatePhoenixBoilerplate.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use PhoenixReactWebpackBoilerplate.Web, :controller
-      use PhoenixReactWebpackBoilerplate.Web, :view
+      use UltimatePhoenixBoilerplate.Web, :controller
+      use UltimatePhoenixBoilerplate.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule PhoenixReactWebpackBoilerplate.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: PhoenixReactWebpackBoilerplate.Web
+      use Phoenix.Controller, namespace: UltimatePhoenixBoilerplate.Web
       import Plug.Conn
-      import PhoenixReactWebpackBoilerplate.Web.Router.Helpers
-      import PhoenixReactWebpackBoilerplate.Web.Gettext
+      import UltimatePhoenixBoilerplate.Web.Router.Helpers
+      import UltimatePhoenixBoilerplate.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/phoenix_react_webpack_boilerplate/web/templates",
-                        namespace: PhoenixReactWebpackBoilerplate.Web
+      use Phoenix.View, root: "lib/ultimate_phoenix_boilerplate/web/templates",
+                        namespace: UltimatePhoenixBoilerplate.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -36,9 +36,9 @@ defmodule PhoenixReactWebpackBoilerplate.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import PhoenixReactWebpackBoilerplate.Web.Router.Helpers
-      import PhoenixReactWebpackBoilerplate.Web.ErrorHelpers
-      import PhoenixReactWebpackBoilerplate.Web.Gettext
+      import UltimatePhoenixBoilerplate.Web.Router.Helpers
+      import UltimatePhoenixBoilerplate.Web.ErrorHelpers
+      import UltimatePhoenixBoilerplate.Web.Gettext
     end
   end
 
@@ -53,7 +53,7 @@ defmodule PhoenixReactWebpackBoilerplate.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import PhoenixReactWebpackBoilerplate.Web.Gettext
+      import UltimatePhoenixBoilerplate.Web.Gettext
     end
   end
 

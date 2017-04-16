@@ -1,5 +1,5 @@
-defmodule PhoenixReactWebpackBoilerplate.Web.Router do
-  use PhoenixReactWebpackBoilerplate.Web, :router
+defmodule UltimatePhoenixBoilerplate.Web.Router do
+  use UltimatePhoenixBoilerplate.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,14 +13,14 @@ defmodule PhoenixReactWebpackBoilerplate.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PhoenixReactWebpackBoilerplate.Web do
+  scope "/", UltimatePhoenixBoilerplate.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PhoenixReactWebpackBoilerplate.Web do
+  # scope "/api", UltimatePhoenixBoilerplate.Web do
   #   pipe_through :api
   # end
 end

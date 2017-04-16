@@ -37,7 +37,7 @@ defmodule Mix.Tasks.App.Setup do
 
   def config do
     Application.get_env(
-      :phoenix_react_webpack_boilerplate,
+      :ultimate_phoenix_boilerplate,
       Mix.Tasks.App.Setup
     )
   end
@@ -45,8 +45,8 @@ defmodule Mix.Tasks.App.Setup do
   def rename_app(name, otp) do
     Mix.Shell.IO.info "Renaming app"
     Rename.run(
-      {"PhoenixReactWebpackBoilerplate", name},
-      {"phoenix_react_webpack_boilerplate", otp}
+      {"UltimatePhoenixBoilerplate", name},
+      {"ultimate_phoenix_boilerplate", otp}
     )
     :ok
   rescue

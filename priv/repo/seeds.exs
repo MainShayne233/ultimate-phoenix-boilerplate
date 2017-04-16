@@ -5,7 +5,7 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     PhoenixReactWebpackBoilerplate.Repo.insert!(%PhoenixReactWebpackBoilerplate.SomeSchema{})
+#     UltimatePhoenixBoilerplate.Repo.insert!(%UltimatePhoenixBoilerplate.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.

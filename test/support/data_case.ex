@@ -1,4 +1,4 @@
-defmodule PhoenixReactWebpackBoilerplate.DataCase do
+defmodule UltimatePhoenixBoilerplate.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule PhoenixReactWebpackBoilerplate.DataCase do
 
   using do
     quote do
-      alias PhoenixReactWebpackBoilerplate.Repo
+      alias UltimatePhoenixBoilerplate.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import PhoenixReactWebpackBoilerplate.DataCase
+      import UltimatePhoenixBoilerplate.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixReactWebpackBoilerplate.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(UltimatePhoenixBoilerplate.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PhoenixReactWebpackBoilerplate.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(UltimatePhoenixBoilerplate.Repo, {:shared, self()})
     end
 
     :ok

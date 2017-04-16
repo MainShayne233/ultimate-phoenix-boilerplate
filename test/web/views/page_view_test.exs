@@ -1,3 +1,3 @@
-defmodule PhoenixReactWebpackBoilerplate.Web.PageViewTest do
-  use PhoenixReactWebpackBoilerplate.Web.ConnCase, async: true
+defmodule UltimatePhoenixBoilerplate.Web.PageViewTest do
+  use UltimatePhoenixBoilerplate.Web.ConnCase, async: true
 end

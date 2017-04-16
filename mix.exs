@@ -1,9 +1,9 @@
-defmodule PhoenixReactWebpackBoilerplate.Mixfile do
+defmodule UltimatePhoenixBoilerplate.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :phoenix_react_webpack_boilerplate,
+      app: :ultimate_phoenix_boilerplate,
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
@@ -16,7 +16,7 @@ defmodule PhoenixReactWebpackBoilerplate.Mixfile do
 
   def application do
     [
-      mod: {PhoenixReactWebpackBoilerplate.Application, []},
+      mod: {UltimatePhoenixBoilerplate.Application, []},
       extra_applications: [:logger, :runtime_tools],
     ]
   end

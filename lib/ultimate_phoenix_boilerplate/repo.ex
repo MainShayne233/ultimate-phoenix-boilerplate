@@ -1,5 +1,5 @@
-defmodule PhoenixReactWebpackBoilerplate.Repo do
-  use Ecto.Repo, otp_app: :phoenix_react_webpack_boilerplate
+defmodule UltimatePhoenixBoilerplate.Repo do
+  use Ecto.Repo, otp_app: :ultimate_phoenix_boilerplate
 
   @doc """
   Dynamically loads the repository url from the

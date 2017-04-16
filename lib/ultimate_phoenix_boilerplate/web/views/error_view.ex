@@ -1,5 +1,5 @@
-defmodule PhoenixReactWebpackBoilerplate.Web.ErrorView do
-  use PhoenixReactWebpackBoilerplate.Web, :view
+defmodule UltimatePhoenixBoilerplate.Web.ErrorView do
+  use UltimatePhoenixBoilerplate.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

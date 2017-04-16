@@ -1,4 +1,4 @@
 ExUnit.start()
 
-Ecto.Adapters.SQL.Sandbox.mode(PhoenixReactWebpackBoilerplate.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(UltimatePhoenixBoilerplate.Repo, :manual)
 

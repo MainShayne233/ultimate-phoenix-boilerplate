@@ -1,5 +1,5 @@
-# Phoenix React Webpack Boilerplate!
-Because new.
+# Ultimate Phoenix Boilerplate
+Create new Phoenix projects with your frontend of choice with ease
 
 Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
 (`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
@@ -17,7 +17,7 @@ If you want something different, set `config/setup.exs` to you liking.
 Then run:
 ```bash
 # clone repo with your app name
-git clone https://github.com/MainShayne233/phoenix_react_webpack_boilerplate.git your_app_name
+git clone https://github.com/MainShayne233/ultimate_phoenix_boilerplate.git your_app_name
 # enter project directory
 cd your_app_name
 # fetch dependencies
