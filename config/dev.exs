@@ -10,7 +10,7 @@ config :ultimate_phoenix_boilerplate, UltimatePhoenixBoilerplate.Web.Endpoint,
        "./node_modules/.bin/webpack-dev-server", "--watch-stdin", "--colors",
        cd: Path.expand("../assets", __DIR__),
      ]
-    ]
+   ]
 
 config :ultimate_phoenix_boilerplate, UltimatePhoenixBoilerplate.Web.Endpoint,
   live_reload: [
