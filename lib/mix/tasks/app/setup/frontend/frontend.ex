@@ -46,10 +46,9 @@ defmodule Mix.Tasks.App.Setup.Frontend do
 
   defp remove_other_asset_directories() do
     Mix.Shell.IO.info "Removing unused asset directories"
-    used_asset_directory = "#{config()[:frontend]}_assets"
     File.ls!
     |> Enum.filter(&(&1 |> String.contains?("assets")))
-    |> Enum.reject(&(&1 == used_asset_directory))
+    |> Enum.reject(&(&1 == "assets"))
     |> Enum.each(fn asset_dir -> 
       Mix.Shell.IO.cmd("rm -rf #{asset_dir}")
     end)
