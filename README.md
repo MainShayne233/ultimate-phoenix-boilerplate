@@ -1,19 +1,25 @@
 # Ultimate Phoenix Boilerplate
-Create new Phoenix projects with your frontend of choice with ease
+Phoenix + (your favorite frontend framework) made easy.
 
-Note: Phoenix 1.3 uses `phx` instead of `phoenix` for things like mix tasks
-(`mix phx.server`, for example). Using `phoenix` should still work, but I advice you
+This boilerplate aims to make it easy to start using a frontend framework with
+Phoenix, and leaving you with no leftover boilerplate clutter.
+
+Note: This boilerplate is based on Phoenix 1.3, which uses `phx` instead of `phoenix` for things like mix tasks (`mix phx.server`, for example).
+Using `phoenix` should still work, but I advice you
 to [install Phoenix 1.3](https://github.com/phoenixframework/phoenix/blob/master/installer/README.md)
 
 ## Support
 
 ### Frontends
 - React
+- Elm
 
 ### Stylesheets
 - SASS (.scss)
 
 ## Make it your own
+
+### Choose your configuration
 
 If you want the default configuration (as of this commit, this is the only configuration):
 - React
@@ -22,9 +28,19 @@ If you want the default configuration (as of this commit, this is the only confi
 
 then skip to running the setup commands.
 
-If you want something different, set `config/setup.exs` to you liking.
+If you want something different you can change the setup configuration in `config/setup.exs`.
 
-Then run:
+A config for using Elm would look like:
+```elixir
+config :ultimate_phoenix_boilerplate, Mix.Tasks.App.Setup,
+  name:     "NewApp",  # the name for your app
+  otp:      "new_app", # typically your app's name in snake case
+  frontend: "elm"      # check supported frontends for options
+```
+
+Then run the setup commands.
+
+### Setup commands
 ```bash
 # clone repo with your app name
 git clone https://github.com/MainShayne233/ultimate_phoenix_boilerplate.git your_app_name
@@ -73,7 +89,6 @@ be annoying when all you care about is the Elixir console. To silence the webpac
 ## Roadmap
 
 ### Frontends
-- Elm
 - Ember
 - Angular
 ### Configuration
@@ -82,4 +97,4 @@ be annoying when all you care about is the Elixir console. To silence the webpac
   - redux
 ### Stylesheets
 - LESS
-- PostCSS 
+- PostCSS
