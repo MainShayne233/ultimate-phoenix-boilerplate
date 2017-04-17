@@ -1,49 +1,50 @@
-var webpack = require('webpack')
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var path = require('path');
-var env = process.env.MIX_ENV || 'dev';
-var prod = env === 'prod';
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const WriteFilePlugin = require('write-file-webpack-plugin')
+const path = require('path')
+const env = process.env.MIX_ENV || 'dev'
+const prod = env === 'prod'
 
-var prodPlugins = [
+const prodPlugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new webpack.DefinePlugin({
     __PROD: prod,
     __DEV: env === 'dev'
   }),
   new CopyWebpackPlugin([{from: "./assets"}]),
-  new ExtractTextPlugin("css/styles.css")
-];
+  new ExtractTextPlugin("css/styles.css"),
+  new WriteFilePlugin(),
+]
 
-
-
-var devPlugins = [
-  new CopyWebpackPlugin([{ from: path.join(__dirname,'static') }]),
+const devPlugins = [
+  new CopyWebpackPlugin([{
+    from: path.join(__dirname, 'static'),
+    to: path.join(__dirname, '..', 'priv', 'static'),
+  }]),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin(),
+  new WriteFilePlugin(),
   new webpack.DefinePlugin({
     __PROD: prod,
     __DEV: env === 'dev',
   }),
 ]
 
+const publicPath = "http://localhost:4002/"
 
+const entry = path.join(__dirname, 'js', 'main.js')
+const hot = 'webpack-dev-server/client?http://localhost:4002'
 
-var devPublicPath = "http://localhost:4002/";
-var prodPublicPath = null;
-
-var entry = "./js/main.js";
-var hot = 'webpack-dev-server/client?http://localhost:4002';
-
-var config = {
-  devtool: prod ? null : 'cheap-module-eval-source-map',
+const config = {
+  devtool: prod ? false : 'cheap-module-eval-source-map',
   entry: prod ? entry : [hot, entry],
   output: {
-    path: path.resolve(__dirname) + '/priv/static',
+    path: path.join(__dirname, '..', 'priv', 'static', 'js'),
     filename: 'app.bundle.js',
-    publicPath: prod ? prodPublicPath : devPublicPath
+    publicPath: publicPath, 
   },
   devServer: {
     hot: true,
@@ -69,6 +70,9 @@ var config = {
       phoenix: path.join(__dirname, '..', 'deps', 'phoenix', 'priv', 'static', 'phoenix.js'),
     },
   },
+  resolveLoader: {
+    modules: [path.join(__dirname, 'node_modules')],
+  },
   module: {
     rules: [
       {
@@ -87,12 +91,11 @@ var config = {
           'elm-hot-loader',
           'elm-webpack-loader?verbose=true&warn=false',
         ],
-        //include: path.join(__dirname, 'js'),
       },
     ],
   },
   plugins: prod ? prodPlugins : devPlugins,
-};
+}
 
 
-module.exports = config;
+module.exports = config
