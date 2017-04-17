@@ -3,6 +3,10 @@ defmodule Mix.Tasks.Assets.Digest do
 
   def run(args) do
     IO.puts "Digesting assets for #{Mix.env}"
+    unless File.dir?("./priv/static") do
+      Mix.Shell.IO.info("Creating priv/static directory")
+      Mix.Shell.IO.cmd("mkdir priv/static")
+    end
     [
       "NODE_ENV=production",
       "./assets/node_modules/webpack/bin/webpack.js", "-p",
