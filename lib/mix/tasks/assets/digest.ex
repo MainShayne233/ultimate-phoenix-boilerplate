@@ -2,7 +2,7 @@ defmodule Mix.Tasks.Assets.Digest do
   use Mix.Task
 
   def run(args) do
-    IO.puts "Digesting assets for #{Mix.env}"
+    Mix.Shell.IO.info "Digesting assets for #{Mix.env}"
     unless File.dir?("./priv/static") do
       Mix.Shell.IO.info("Creating priv/static directory")
       Mix.Shell.IO.cmd("mkdir priv/static")
