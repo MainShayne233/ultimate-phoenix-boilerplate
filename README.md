@@ -43,7 +43,7 @@ Then run the setup commands.
 ### Setup commands
 ```bash
 # clone repo with your app name
-git clone https://github.com/MainShayne233/ultimate_phoenix_boilerplate.git your_app_name
+git clone https://github.com/MainShayne233/ultimate-phoenix-boilerplate.git your_app_name
 # enter project directory
 cd your_app_name
 # fetch dependencies
