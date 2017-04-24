@@ -149,6 +149,9 @@ defmodule Mix.Tasks.App.Setup do
     ```bash
     mix deps.get
     mix ecto.create
+    cd assets
+    npm i
+    #{if config()[:frontend] == "elm", do: "elm package install -y", else: ""}
     iex -S mix phoenix.server
     ``` 
 
