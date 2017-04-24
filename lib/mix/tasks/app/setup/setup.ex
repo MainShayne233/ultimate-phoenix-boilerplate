@@ -9,6 +9,7 @@ defmodule Mix.Tasks.App.Setup do
          :ok <- node_init(),
          :ok <- remove_mix_task(),
          :ok <- remove_setup_config(),
+         :ok <- create_readme(),
          :ok <- git_init() do
       :ok
     end
@@ -136,7 +137,24 @@ defmodule Mix.Tasks.App.Setup do
     File.write!("config/dev.exs", with_import_removed)
   rescue
     _ -> {:error, "Failed to remove setup config"}
+  end
 
+  def create_readme do
+    Mix.Shell.IO.info "Creating fresh README"
+    readme = """
+    # #{config()[:name]}
+    
+    ## Install
+   
+    ```bash
+    mix deps.get
+    mix ecto.create
+    iex -S mix phoenix.server
+    ``` 
+
+    Then visit [localhost:4000](http://localhost:4000)
+    """
+    File.write("README.md", readme)
   end
 
   defp print_conclusion_message do
