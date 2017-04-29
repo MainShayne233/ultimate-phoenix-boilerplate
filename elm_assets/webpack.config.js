@@ -89,7 +89,7 @@ const config = {
         exclude: [/elm-stuff/, /node_modules/],
         use: [
           'elm-hot-loader',
-          'elm-webpack-loader?verbose=true&warn=false',
+          'elm-webpack-loader?pathToMake=./node_modules/.bin/elm-make&cwd=assets&verbose=true&warn=false',
         ],
       },
     ],
