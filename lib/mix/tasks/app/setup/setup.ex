@@ -9,6 +9,7 @@ defmodule Mix.Tasks.App.Setup do
          :ok <- node_init(),
          :ok <- remove_mix_task(),
          :ok <- remove_setup_config(),
+         :ok <- remove_setup_test(),
          :ok <- create_readme(),
          :ok <- git_init() do
       :ok
@@ -135,6 +136,14 @@ defmodule Mix.Tasks.App.Setup do
     |> Enum.reject(&(&1 |> String.contains?("setup.exs")))
     |> Enum.join("\n")
     File.write!("config/dev.exs", with_import_removed)
+  rescue
+    _ -> {:error, "Failed to remove setup config"}
+  end
+
+  def remove_setup_test do
+    Mix.Shell.IO.info "Removing setup test file"
+    Mix.Shell.IO.cmd("rm -rf test/setup_test.exs")
+    :ok
   rescue
     _ -> {:error, "Failed to remove setup config"}
   end
