@@ -1,6 +1,8 @@
 # Ultimate Phoenix Boilerplate
 Phoenix + (your favorite frontend framework) made easy.
 
+[![Build Status](https://travis-ci.org/MainShayne233/ultimate-phoenix-boilerplate.svg?branch=master)](https://travis-ci.org/MainShayne233/ultimate-phoenix-boilerplate)
+
 This boilerplate aims to make it easy to start using a frontend framework with
 Phoenix, and leaving you with no leftover boilerplate clutter.
 
