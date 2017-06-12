@@ -145,7 +145,7 @@ defmodule Mix.Tasks.App.Setup do
     Mix.Shell.IO.cmd("rm -rf test/setup_test.exs")
     :ok
   rescue
-    _ -> {:error, "Failed to remove setup config"}
+    _ -> {:error, "Failed to remove setup test"}
   end
 
   def create_readme do
