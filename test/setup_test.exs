@@ -1,6 +1,5 @@
 defmodule SetupTest do
   use ExUnit.Case, async: false
-  require Logger
 
   @app_dir "ultimate_phoenix_boilerplate_test_app"
   @app_name "UltimatePhoenixBoilerplateTestApp"
@@ -14,9 +13,8 @@ defmodule SetupTest do
     File.cd!(@app_dir)
     :os.cmd('mix deps.get')
     :os.cmd('mix app.setup #{@app_name} #{@app_dir}')
-    Logger.error("Starting server")
     start_server()
-    :timer.sleep(5000)
+    :timer.sleep(10000)
     {page, 0} = System.cmd("curl", ["localhost:4000"])
     assert page |> String.contains?("Hello UltimatePhoenixBoilerplateTestApp!")
     kill_server()
