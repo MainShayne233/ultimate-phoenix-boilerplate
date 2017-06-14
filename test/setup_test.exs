@@ -36,7 +36,6 @@ defmodule SetupTest do
     |> elem(0)
     |> String.split("\n")
     |> Enum.filter(&( &1 |> String.contains?("mix phoenix.server") ))
-    |> IO.inspect
     |> Enum.each(fn process -> 
       pid = process
       |> String.split(" ")
