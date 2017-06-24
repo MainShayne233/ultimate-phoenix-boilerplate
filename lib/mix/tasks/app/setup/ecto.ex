@@ -12,9 +12,12 @@ defmodule Mix.Tasks.App.Setup.Ecto do
       remove_repo_dir()
       remove_from_tests()
       remove_from_mix_exs()
+      remove_deps()
     end
     :ok
   end
+
+  def run(_), do: :nothing
 
   defp remove_from_configs do
     "config/dev.exs"
@@ -60,6 +63,11 @@ defmodule Mix.Tasks.App.Setup.Ecto do
     |> Setup.remove_section("postgrex")
     "mix.exs"
     |> Setup.remove_section("defp aliases do", 4)
+  end
+
+  def remove_deps do
+    Mix.Shell.IO.cmd("rm -rf deps/phoenix_ecto")
+    Mix.Shell.IO.cmd("rm -rf deps/postgrex")
   end
 
   defp errors_po do
