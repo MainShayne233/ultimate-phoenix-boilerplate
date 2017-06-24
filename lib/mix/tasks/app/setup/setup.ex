@@ -151,7 +151,7 @@ defmodule Mix.Tasks.App.Setup do
   end
 
   def remove_travis_yml do
-    Mix.Shell.IO.cmdI("rm .travis.yml")
+    Mix.Shell.IO.cmd("rm .travis.yml")
   end
 
   def create_readme do
