@@ -11,6 +11,7 @@ defmodule Mix.Tasks.App.Setup do
          :ok <- remove_mix_task(),
          :ok <- remove_setup_config(),
          :ok <- remove_setup_test(),
+         :ok <- remove_travis_yml(),
          :ok <- create_readme(),
          :ok <- git_init() do
       :ok
@@ -147,6 +148,10 @@ defmodule Mix.Tasks.App.Setup do
     :ok
   rescue
     _ -> {:error, "Failed to remove setup test"}
+  end
+
+  def remove_travis_yml do
+    Mix.Shell.IO.cmdI("rm .travis.yml")
   end
 
   def create_readme do
