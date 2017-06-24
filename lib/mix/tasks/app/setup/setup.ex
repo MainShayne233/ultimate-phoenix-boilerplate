@@ -158,8 +158,7 @@ defmodule Mix.Tasks.App.Setup do
    
     ```bash
     mix deps.get
-    mix ecto.create
-    cd assets
+    #{if config()[:ecto] == false, do: "", else: "mix ecto.create\n"}cd assets
     npm i
     #{if config()[:frontend] == "elm", do: "elm package install -y", else: ""}
     iex -S mix phoenix.server
@@ -171,12 +170,16 @@ defmodule Mix.Tasks.App.Setup do
   end
 
   defp print_conclusion_message do
+    if config()[:ecto] != false do
+      """
+
+      Almost done!
+
+      mix ecto.create # setup your database
+      """
+      |> Mix.Shell.IO.info
+    end
     Mix.Shell.IO.info """
-
-    Almost done!
-
-    Create your database: 
-    mix ecto.create
 
     Start your app:
     iex -S mix phx.server (or phoenix.server for Phoenix versions < 1.3)
