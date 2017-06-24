@@ -3,12 +3,15 @@ defmodule Mix.Tasks.App.Setup.Ecto do
   use Mix.Task
 
   def run(_name, otp) do
-    if Setup.config()[:no_ecto] == true
+    if Setup.config()[:ecto] == false do
       Mix.Shell.IO.info "Removing Ecto stuff"
       remove_from_configs()
       remove_from_application(otp)
-      remove_repo()
-      remove_from_errors_po()
+      remove_repo(otp)
+      remove_from_errors()
+      remove_repo_dir()
+      remove_from_tests()
+      remove_from_mix_exs()
     end
   end
 
@@ -25,12 +28,37 @@ defmodule Mix.Tasks.App.Setup.Ecto do
     |> Setup.remove_section("Ecto", 1)
   end
 
-  defp remove_repo do
+  defp remove_repo(otp) do
     Mix.Shell.IO.cmd("rm -rf lib/#{otp}/repo.ex")
   end
 
-  defp remove_from_errors_po do
+  defp remove_from_errors do
     File.write!("priv/gettext/en/LC_MESSAGES/errors.po", errors_po())
+    File.write!("priv/gettext/errors.pot", errors_pot())
+  end
+
+  defp remove_repo_dir do
+    Mix.Shell.IO.cmd("rm -rf priv/repo")
+  end
+
+  def remove_from_tests do
+    "test/support/channel_case.ex"
+    |> Setup.remove_section("Ecto", 3)
+    "test/support/conn_case.ex"
+    |> Setup.remove_section("Ecto", 3)
+    Mix.Shell.IO.cmd("rm test/support/data_case.ex")
+    File.write!("test/test_helper.exs", "ExUnit.start()")
+  end
+
+  def remove_from_mix_exs do
+    "mix.exs"
+    |> Setup.remove_section("aliases")
+    "mix.exs"
+    |> Setup.remove_section("phoenix_ecto")
+    "mix.exs"
+    |> Setup.remove_section("postgrex")
+    "mix.exs"
+    |> Setup.remove_section("defp aliases do", 4)
   end
 
   defp errors_po do
@@ -45,7 +73,7 @@ defmodule Mix.Tasks.App.Setup.Ecto do
     ## to merge POT files into PO files.
     msgid ""
     msgstr ""
-    "Language: en\n"
+    "Language: en\\n"
     """
   end
 
@@ -60,6 +88,7 @@ defmodule Mix.Tasks.App.Setup.Ecto do
     ## Run `mix gettext.extract` to bring this file up to
     ## date. Leave `msgstr`s empty as changing them here as no
     ## effect: edit them in PO (`.po`) files instead.
+    
     """
   end
 end

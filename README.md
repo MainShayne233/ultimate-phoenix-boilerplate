@@ -37,6 +37,7 @@ A config for using Elm would look like:
 config :ultimate_phoenix_boilerplate, Mix.Tasks.App.Setup,
   name:     "NewApp",  # the name for your app
   otp:      "new_app", # typically your app's name in snake case
+  ecto:     true,      # want to use ecto/postgres? default true
   frontend: "elm"      # check supported frontends for options
 ```
 
