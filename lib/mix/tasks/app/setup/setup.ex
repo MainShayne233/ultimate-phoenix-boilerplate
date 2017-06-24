@@ -5,6 +5,7 @@ defmodule Mix.Tasks.App.Setup do
     with :ok <- rename_app(name, otp),
          :ok <- remove_rename_dependency(),
          :ok <- create_prod_secret_config(name, otp),
+         :ok <- __MODULE__.Ecto.run(),
          :ok <- __MODULE__.Frontend.run(),
          :ok <- node_init(),
          :ok <- remove_mix_task(),
@@ -188,5 +189,32 @@ defmodule Mix.Tasks.App.Setup do
 
   defp print_error_message(error) do
     Mix.Shell.IO.error(error)
+  end
+
+  def remove_section(file_path, start_string, lines_down) do
+    lines =
+      file_path
+      |> File.read!
+      |> Split("\n")
+
+    start_index =
+      lines 
+      |> Enum.find_index(&( &1 |> String.contains?(start_string)))
+
+    updated_file = 
+      start_index
+      |> case do
+        0 -> []
+        start_index ->
+          lines
+          |> Enum.slice(0..(start_index -1))
+      end
+      |> Enum.concat(
+        lines
+        |> Enum.slice((start_index + 1 + lines_down)..-1)
+      )
+      |> Enum.join("\n")
+
+    File.write!(file_path, updated_file)
   end
 end
