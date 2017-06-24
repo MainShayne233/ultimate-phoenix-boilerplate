@@ -13,6 +13,7 @@ defmodule Mix.Tasks.App.Setup.Ecto do
       remove_from_tests()
       remove_from_mix_exs()
     end
+    :ok
   end
 
   defp remove_from_configs do
